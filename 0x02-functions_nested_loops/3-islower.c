@@ -2,7 +2,7 @@
 
 /**
  * _islower - print only lowercase keys
- *
+ * @c: is tht int that is use for thr argument
  * Return: To 0 or 1
  */
 int _islower(int c)
