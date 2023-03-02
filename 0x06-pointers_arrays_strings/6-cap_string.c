@@ -2,22 +2,27 @@
 
 /**
  * *cap_string - function
- * @str: string
+ * @s: string
  *
  * Return: to the pointer
  */
 
-char *cap_string(char *str)
+char *cap_string(char *s)
 {
 	int i = 0;
 
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if ((i == 0 || str[i - 1] == ' ' || str[i - 1] == '\t' || str[i - 1] == '\n' || str[i - 1] == ',' || str[i - 1] == ';' || str[i - 1] == '.' || str[i - 1] == '!' || str[i - 1] == '?' || str[i - 1] == '\"' || str[i - 1] == '(' || str[i - 1] == ')' || str[i - 1] == '{' || str[i - 1] == '}') && (str[i] >= 'a' && str[i] <= 'z'))
+		if ((s[i] >= 'a' && s[i] <= 'z')
+		    && (s[i - 1] == ',' || s[i - 1] == ';' || s[i - 1] == '.' ||
+			s[i - 1] == '!' || s[i - 1] == '?' || s[i - 1] == '"' ||
+			s[i - 1] == '(' || s[i - 1] == ')' || s[i - 1] == '{' ||
+			s[i - 1] == '}' || s[i - 1] == ' ' || s[i - 1] == '\t'
+			|| s[i - 1] == '\n'))
 		{
-			str[i] -= 32;
+			s[i] -= 32;
 		}
 		i++;
 	}
-	return (str);
+	return (s);
 }
