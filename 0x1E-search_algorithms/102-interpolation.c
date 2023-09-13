@@ -1,16 +1,6 @@
 #include "search_algos.h"
 
 /**
- * print_c - function of the prototype
- * @array: array
- * @c: index checked
- */
-void print_c(int *array, size_t c)
-{
-	printf("Value checked array[%lu] = [%d]\n", c, array[c]);
-}
-
-/**
  * interpolation_search - function of the prototype
  * @array: array of ints
  * @size: size of array
@@ -19,27 +9,42 @@ void print_c(int *array, size_t c)
  */
 int interpolation_search(int *array, size_t size, int value)
 {
-	size_t a = 0;
-	size_t b = size - 1;
-	size_t poss;
+	size_t pos, low, high;
+	double f;
 
 	if (array == NULL)
 		return (-1);
 
-	poss = a + (((double)(a - b) / (array[b] - array[a]))
-		   * (value - array[a]));
-	while (poss < size)
+	low = 0;
+	high = size - 1;
+
+	while (size)
 	{
-		print_c(array, poss);
-		if (array[poss] == value)
-			return (poss);
-		else if (array[poss] < value)
-			b = poss + 1;
+		f = (double)(high - low) / (array[high] - array[low]) * (value - array[low]);
+		pos = (size_t)(low + f);
+		printf("Value checked array[%d]", (int)pos);
+
+		if (pos >= size)
+		{
+			printf(" is out of range\n");
+			break;
+		}
 		else
-			b = poss - 1;
-		poss = a + (((double)(b - a) / (array[b] - array[a]))
-			   * (value - array[a]));
+		{
+			printf(" = [%d]\n", array[pos]);
+		}
+
+		if (array[pos] == value)
+			return ((int)pos);
+
+		if (array[pos] < value)
+			low = pos + 1;
+		else
+			high = pos - 1;
+
+		if (low == high)
+			break;
 	}
-	printf("Value checked array[%lu] is out of range\n", poss);
+
 	return (-1);
-}
+}	
